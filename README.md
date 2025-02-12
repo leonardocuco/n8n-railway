@@ -6,7 +6,7 @@ Welcome to the n8n Railway Template repository! This project lets you deploy an 
 
 Click the button below to deploy your n8n instance on Railway:
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?repo=https://github.com/leonardocuco/n8n-railway)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/template/gwx63B?referralCode=es41Wq)
 
 **Important:**  
 - Make sure the URL uses **railway.app** (not railway.com).  
