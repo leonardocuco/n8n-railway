@@ -7,29 +7,21 @@
         "repo": "leonardocuco/n8n-railway"
       },
       "envVars": {
-        // Basic Auth for n8n
         "N8N_BASIC_AUTH_ACTIVE": "true",
         "N8N_BASIC_AUTH_USER": "admin",
         "N8N_BASIC_AUTH_PASSWORD": "{{ generate_password() }}",
         
-        // Tell n8n we're using Postgres
         "DB_TYPE": "postgresdb",
-        
-        // These four map directly to the Postgres plugin
-        // so n8n knows how to connect
         "DB_POSTGRESDB_HOST": "{{ postgres.HOST }}",
         "DB_POSTGRESDB_DATABASE": "{{ postgres.DB }}",
         "DB_POSTGRESDB_USER": "{{ postgres.USER }}",
         "DB_POSTGRESDB_PASSWORD": "{{ postgres.PASSWORD }}",
         
-        // Additional env: which port to run n8n on
         "PORT": "5678",
         
-        // For advanced node function calls (optional)
-        "NODE_FUNCTION_ALLOW_EXTERNAL": "pg"
+        "NODE_FUNCTION_ALLOW_EXTERNAL": "pg",
         
-        // Optional: silence or enforce the settings file permissions
-        // "N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS": "true" 
+        "N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS": "true" 
       }
     }
   ],
@@ -37,7 +29,6 @@
     "postgres": {
       "name": "postgres",
       "envVars": {
-        // The plugin will spin up a Postgres instance with these defaults:
         "POSTGRES_DB": "n8n_db",
         "POSTGRES_USER": "n8n_user",
         "POSTGRES_PASSWORD": "{{ generate_password() }}"
