@@ -1,9 +1,27 @@
 FROM n8nio/n8n:latest
 
-# If you need special Alpine networking or other custom steps,
-# you can do them here. Otherwise you can even skip the Dockerfile entirely.
+# Build arguments for database credentials and other settings
+ARG PGPASSWORD
+ARG PGHOST
+ARG PGPORT
+ARG PGDATABASE
+ARG PGUSER
+ARG N8N_ENCRYPTION_KEY
+ARG TZ
+ARG WEBHOOK_URL
 
-ENV ENABLE_ALPINE_PRIVATE_NETWORKING=true
+# Configure n8n to use PostgreSQL
+ENV DB_TYPE=postgresdb
+ENV DB_POSTGRESDB_DATABASE=$PGDATABASE
+ENV DB_POSTGRESDB_HOST=$PGHOST
+ENV DB_POSTGRESDB_PORT=$PGPORT
+ENV DB_POSTGRESDB_USER=$PGUSER
+ENV DB_POSTGRESDB_PASSWORD=$PGPASSWORD
 
-# Start n8n with the official entrypoint
+# Set additional n8n and system settings
+ENV N8N_ENCRYPTION_KEY=$N8N_ENCRYPTION_KEY
+ENV TZ=${TZ:-Europe/Berlin}       # Default timezone can be changed as needed
+ENV WEBHOOK_URL=$WEBHOOK_URL
+
+# Start n8n
 CMD ["n8n", "start"]
