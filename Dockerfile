@@ -1,10 +1,15 @@
 FROM n8nio/n8n:latest
+
+# install ffmpeg (no need for chown)
+USER root
+RUN apk add --no-cache ffmpeg
+
+# drop this—leave it owned by root, since we run as root
+# RUN mkdir -p /home/node/.n8n \
+#  && chown -R node:node /home/node/.n8n
+
+# stay as root so that your volume (root-owned) is writable
 USER root
 
-RUN apk add --no-cache ffmpeg \
- && mkdir -p /home/node/.n8n \
- && chown -R node:node /home/node/.n8n
-
-USER node
-
-CMD ["sh", "-c", "chown -R node:node /home/node/.n8n && n8n start"]
+# no ENTRYPOINT override needed; just use the default:
+CMD ["n8n", "start"]
