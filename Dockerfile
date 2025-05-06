@@ -6,3 +6,5 @@ RUN apk add --no-cache ffmpeg \
  && chown -R node:node /home/node/.n8n
 
 USER node
+
+CMD ["sh", "-c", "chown -R node:node /home/node/.n8n && n8n start"]
