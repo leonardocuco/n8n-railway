@@ -1,25 +1,29 @@
-# n8n on Railway 🚀
+# n8n-railway Docker Image
 
-Welcome to the n8n Railway Template repository! This project lets you deploy an n8n instance with PostgreSQL on Railway seamlessly—with dynamic password generation for enhanced security.
+This repository provides a custom Docker image for [n8n](https://n8n.io/), an extendable workflow automation tool. The image is based on the official `n8nio/n8n:latest` image and adds support for `ffmpeg`.
 
-## One-Click Deployment
+## What this Docker image does
+- **Base Image:** Uses the official `n8nio/n8n:latest` as the starting point.
+- **Adds ffmpeg:** Installs `ffmpeg` via `apt-get` to enable workflows that require audio/video processing or conversion.
+- **Optimized:** Removes package lists after installation to keep the image size smaller.
 
-Click the button below to deploy your n8n instance on Railway:
+## Usage
+This image is intended for users who need n8n with `ffmpeg` available for their workflows, such as processing media files.
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/template/gwx63B?referralCode=es41Wq)
+## How to use
+You can pull and run this image from Docker Hub:
 
-**Important:**  
-- Make sure the URL uses **railway.app** (not railway.com).  
-- If you see a 404 ("Looks like you are lost"), verify that:
-  - Your repository is public.
-  - The `railway.json` file is in the root of your default branch (typically `main`).
+```sh
+docker pull leonardocuco/n8n-railway:latest
+docker run -p 5678:5678 leonardocuco/n8n-railway:latest
+```
 
-## How It Works
+## Building locally
+To build the image yourself:
 
-- **Dynamic Password Generation:**  
-  The `railway.json` file uses placeholders like `{{ generate_password() }}` to automatically generate secure, random passwords when the project is deployed.
-  
-- **Service Configuration:**  
-  The deployment sets up:
-  - An **n8n service** using your repository’s Dockerfile.
-  - A **PostgreSQL plugin** configured with dynamic credentials.
+```sh
+docker build -t yourname/n8n-railway:latest ./n8n-railway
+```
+
+## Automated Builds
+This repository includes a GitHub Actions workflow to automatically build and push the image to Docker Hub on every push to the `main` branch or when triggered manually. 
